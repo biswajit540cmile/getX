@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('GetX Home Screen'),
+          title: const Text('GetX Home Screen'),
         ),
         body:  Center(
           child: ElevatedButton(onPressed: () => Get.toNamed(AppRoutes.showData), child: const Text("Click Me")),
