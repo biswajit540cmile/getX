@@ -15,7 +15,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.showData,
-      page: () => ShowDataScreen(),
+      page: () => const ShowDataScreen(),
       binding: ShowBinding(),
     ),
   ];

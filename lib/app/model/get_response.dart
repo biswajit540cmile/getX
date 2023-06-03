@@ -1,61 +1,29 @@
-import 'dart:convert';
+//import 'dart:convert';
 
-// GetResponse getResponseFromJson(String str) => GetResponse.fromJson(json.decode(str));
-//
-// String getResponseToJson(GetResponse data) => json.encode(data.toJson());
+//List<GetResponse> getResponseFromJson(String str) => List<GetResponse>.from(json.decode(str).map((x) => GetResponse.fromJson(x)));
+
+//String getResponseToJson(List<GetResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class GetResponse {
-  String status;
-  List<Datum> data;
-  String message;
+  int userId;
+  int id;
+  String title;
 
   GetResponse({
-    required this.status,
-    required this.data,
-    required this.message,
+    required this.userId,
+    required this.id,
+    required this.title,
   });
 
   factory GetResponse.fromJson(Map<String, dynamic> json) => GetResponse(
-    status: json["status"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-    message: json["message"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "status": status,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    "message": message,
-  };
-}
-
-class Datum {
-  int id;
-  String employeeName;
-  int employeeSalary;
-  int employeeAge;
-  String profileImage;
-
-  Datum({
-    required this.id,
-    required this.employeeName,
-    required this.employeeSalary,
-    required this.employeeAge,
-    required this.profileImage,
-  });
-
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    userId: json["userId"],
     id: json["id"],
-    employeeName: json["employee_name"],
-    employeeSalary: json["employee_salary"],
-    employeeAge: json["employee_age"],
-    profileImage: json["profile_image"],
+    title: json["title"],
   );
 
   Map<String, dynamic> toJson() => {
+    "userId": userId,
     "id": id,
-    "employee_name": employeeName,
-    "employee_salary": employeeSalary,
-    "employee_age": employeeAge,
-    "profile_image": profileImage,
+    "title": title,
   };
 }

@@ -4,8 +4,7 @@ import '../../routes/app_routes.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -15,7 +14,7 @@ class HomePage extends StatelessWidget {
           title: const Text('GetX Home Screen'),
         ),
         body:  Center(
-          child: ElevatedButton(onPressed: () => Get.toNamed(AppRoutes.showData), child: const Text("Click Me")),
+          child: ElevatedButton(onPressed: () {Get.toNamed(AppRoutes.showData);}, child: const Text("Click Me")),
         ),
       ),
     );
