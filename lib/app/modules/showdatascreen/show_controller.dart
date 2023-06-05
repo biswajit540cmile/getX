@@ -9,7 +9,7 @@ class ShowController extends GetxController {
   List<GetResponse> res1 = <GetResponse>[].obs;
   var isLoading = false.obs; //use for
   RxInt page = 1.obs;
-  var lastPage = false.obs;
+  RxBool lastPage = false.obs;
 
   Future<void> getDataMethod() async {
     Response response =
@@ -19,10 +19,10 @@ class ShowController extends GetxController {
     if (response.statusCode == 200) {
       var res = response.body as Iterable;
       List<GetResponse> ress = res.map((v) => GetResponse.fromJson(v)).toList();
-      // print(ress);
       isLoading.value = true;
       if(ress.isEmpty){
         lastPage.value = true;
+        update();
       }else {
         res1.addAll(ress);
 
