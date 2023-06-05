@@ -1,43 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/app/model/get_response.dart';
 import 'package:getx/app/modules/showdatascreen/show_controller.dart';
-class ShowDataScreen extends StatelessWidget {
+class ShowDataScreen extends StatefulWidget {
    const ShowDataScreen({super.key});
+
+  @override
+  State<ShowDataScreen> createState() => _ShowDataScreenState();
+}
+
+class _ShowDataScreenState extends State<ShowDataScreen> {
+  ScrollController scrollController = ScrollController();
+  ShowController showController = Get.find<ShowController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    showController.getDataMethod();
+
+  }
    @override
   Widget build(BuildContext context) {
+     scrollController.addListener(() {
+       if (scrollController.position.pixels ==
+           scrollController.position.maxScrollExtent) {
+         showController.getDataMethod();
+       }
+     });
     return GetBuilder<ShowController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: const Text('GetX Data Screen'),
         ),
-        body:   Obx(()=>!controller.isLoading.value ? const Center(child: CircularProgressIndicator()) :
+         // controller.lastPage.value == true ? const SnackBar(content: Text("There is no data to fetch")) :
+        body:   Obx(()=>  !controller.isLoading.value ? const Center(child: CircularProgressIndicator()) :
           SingleChildScrollView(
+            controller: scrollController,
             child: Column(
               children: [
                 const Text("Api Calling Screen"),
      ListView.builder(
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
-          itemCount: controller.res1.length,
+          itemCount: controller.res1.length + 1,
           itemBuilder: (BuildContext context, int index) {
-            return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                border: Border.all(width: 2)
-              ),
-              child: Column(
-                children: [
-                  Text("${controller.res1[index].userId}"),
-                  Text("${controller.res1[index].id}"),
-                  Text(controller.res1[index].title,style: const TextStyle(overflow: TextOverflow.ellipsis)),
-                ],
-              ),
-            ),
-          );
-      },)
+     if (index < controller.res1.length) {
+     //  final GetResponse resList = controller.res1[index];
+       return
+         Padding(
+           padding: const EdgeInsets.all(10.0),
+           child: Container(
+             decoration: BoxDecoration(
+                 borderRadius: const BorderRadius.all(Radius.circular(10)),
+                 border: Border.all(width: 2)
+             ),
+             child: Column(
+               children: [
+                 Text("${controller.res1[index].userId}"),
+                 Text("${controller.res1[index].id}"),
+                 Text(controller.res1[index].title,
+                     style: const TextStyle(overflow: TextOverflow.ellipsis)),
+               ],
+             ),
+           ),
+         );
+     }else if (controller.isLoading.value) {
+       return const Center(child: CircularProgressIndicator());
+     } else {
+       return SizedBox.shrink();
+     }
+
+          },)
               ]
             ),
           ),
