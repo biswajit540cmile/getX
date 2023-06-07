@@ -1,9 +1,26 @@
 //import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/get_response.dart';
 
 class ShowController extends GetxController {
-  // ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
+  void onInit(){
+    super.onInit();
+    getDataMethod();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        print("${scrollController.position.pixels} @@ ${scrollController.position.maxScrollExtent}");
+         getDataMethod();
+      }
+    });
+  }
+
+  void onClose(){
+    super.onClose();
+    scrollController.removeListener(() { });
+  }
   final GetConnect connect = Get.find<GetConnect>();
   GetResponse? getResponse;
   List<GetResponse> res1 = <GetResponse>[].obs;
@@ -25,7 +42,6 @@ class ShowController extends GetxController {
         update();
       }else {
         res1.addAll(ress);
-
         page.value++;
       }
     } else {
