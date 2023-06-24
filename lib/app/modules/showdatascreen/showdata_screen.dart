@@ -1,36 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx/app/modules/showdatascreen/show_controller.dart';
-class ShowDataScreen extends StatefulWidget {
-   const ShowDataScreen({super.key});
+// ignore: must_be_immutable
+class ShowDataScreen extends StatelessWidget {
+    ShowDataScreen({super.key});
 
-  @override
-  State<ShowDataScreen> createState() => _ShowDataScreenState();
-}
-
-class _ShowDataScreenState extends State<ShowDataScreen> {
 ///Implimenting showController
   ShowController showController = Get.find<ShowController>();
+
  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   showController.getDataMethod();
-  //   scrollController.addListener(() {
-  //     if (scrollController.position.pixels ==
-  //         scrollController.position.maxScrollExtent) {
-  //       showController.getDataMethod();
-  //     }
-  //   });
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   scrollController.removeListener((){});
-  //   super.dispose();
-  // }
-
    @override
   Widget build(BuildContext context) {
     return GetBuilder<ShowController>(

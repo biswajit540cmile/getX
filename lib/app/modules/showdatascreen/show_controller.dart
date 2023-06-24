@@ -5,18 +5,20 @@ import '../../model/get_response.dart';
 
 class ShowController extends GetxController {
   ScrollController scrollController = ScrollController();
+  @override
   void onInit(){
     super.onInit();
     getDataMethod();
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        print("${scrollController.position.pixels} @@ ${scrollController.position.maxScrollExtent}");
+     //   print("${scrollController.position.pixels} @@ ${scrollController.position.maxScrollExtent}");
          getDataMethod();
       }
     });
   }
 
+  @override
   void onClose(){
     super.onClose();
     scrollController.removeListener(() { });
